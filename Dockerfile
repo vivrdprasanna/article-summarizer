@@ -13,5 +13,5 @@ COPY nlp /etc/nginx/sites-enabled/default
 COPY entrypoint.sh /entrypoint.sh
 
 EXPOSE 80
-# CMD ["nginx", "-g", "daemon off;"]
+RUN chmod +x entrypoint.sh
 ENTRYPOINT [ "/entrypoint.sh" ]
