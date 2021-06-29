@@ -18,6 +18,7 @@ DO NOT TOUCH OTHER FILES.
      - st_app.py
      - utils.py
      - uwsgi.ini
+     - wsgi.py
      - **weights_location**
      - static/
           - **images/**
