@@ -29,7 +29,7 @@ Coding center code - comment out the following 4 lines of code when ready for pr
 '''
 # load up the model into memory
 # you will need to have all your trained model in the app/ directory.
-ai = aitextgen(to_gpu=False)
+ai = aitextgen(to_gpu=False, model=r"EleutherAI/gpt-neo-125M")
 
 # setup the webserver
 # port may need to be changed if there are multiple flask servers running on same server
