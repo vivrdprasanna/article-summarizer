@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="TextSummarization">
+    <meta name="description" content="">
+    <meta name="page_type" content="np-template-header-footer-from-plugin">
+    <title>Home</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='nicepage.css') }}" media="screen">
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}" media="screen">
+    <script class="u-script" type="text/javascript" src="jquery-1.9.1.min.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <script type="application/ld+json">{
+		"@context": "http://schema.org",
+		"@type": "Organization",
+		"name": "WebSite484302",
+		"url": "/"
+}</script>
+    <meta name="theme-color" content="#478ac9">
+    <meta property="og:title" content="Home">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+    <link rel="canonical" href="/">
+  </head>
+  <body class="u-body"><header class="u-clearfix u-grey-80 u-header u-header" id="sec-2388"><div class="u-clearfix u-sheet u-sheet-1">
+        <nav class="u-menu u-menu-dropdown u-offcanvas u-menu-1">
+          <div class="menu-collapse" style="font-size: 1rem; letter-spacing: 0px;">
+            <a class="u-button-style u-custom-left-right-menu-spacing u-custom-padding-bottom u-custom-text-active-color u-custom-text-hover-color u-custom-top-bottom-menu-spacing u-nav-link u-text-active-palette-1-base u-text-hover-palette-2-base" href="#">
+              <svg><use xlink:href="#menu-hamburger"></use></svg>
+              <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs><symbol id="menu-hamburger" viewBox="0 0 16 16" style="width: 16px; height: 16px;"><rect y="1" width="16" height="2"></rect><rect y="7" width="16" height="2"></rect><rect y="13" width="16" height="2"></rect>
+</symbol>
+</defs></svg>
+            </a>
+          </div>
+          <div class="u-custom-menu u-nav-container">
+            <ul class="u-nav u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-button-style u-nav-link u-text-active-custom-color-4 u-text-hover-custom-color-4" href="Home.html" style="padding: 10px 20px;">Home</a>
+</li></ul>
+          </div>
+          <div class="u-custom-menu u-nav-container-collapse">
+            <div class="u-black u-container-style u-inner-container-layout u-opacity u-opacity-95 u-sidenav">
+              <div class="u-sidenav-overflow">
+                <div class="u-menu-close"></div>
+                <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Home.html" style="padding: 10px 20px;">Home</a>
+</li></ul>
+              </div>
+            </div>
+            <div class="u-black u-menu-overlay u-opacity u-opacity-70"></div>
+          </div>
+        </nav>
+      </div></header>
+    <section class="u-clearfix u-image u-shading u-section-1" id="sec-6b4d" data-image-width="1020" data-image-height="520">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <h1 class="u-text u-text-body-alt-color u-title u-text-1" spellcheck="false"><b>Text Summarization</b>
+        </h1>
+        <h2 class="u-subtitle u-text u-text-body-alt-color u-text-2" spellcheck="false">&nbsp;An AI that creates a summary from an article you input</h2>
+      </div>
+    </section>
+    <section class="u-align-center u-clearfix u-section-2" id="sec-4d08">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <h2 class="u-text u-text-1">Try our app here</h2>
+       
+        
+        
+        <div class="u-form u-form-1">
+          
+          
+                  <!----------------- Code Starts Here-------------------------->
+
+	  <div class="container">
+        <div>
+          <div class = "input-gro$$$$up">
+    <form action="{{url_for('result')}}" method="post" enctype="multipart/form-data"> 
+      
+      
+             <input name = "Link" class = "form-control" placeholder = "Enter your link here..." style="width: 600px; height:50px" >
+      <br><br><br>
+             <input type="submit">
+        </form>
+          </div>
+        </div>
+        <br>
+        <div class="col-md-3">
+          <h1>Summary:</h1>
+          <div class="alert alert-primary" role="alert">
+              {{ prediction_text }}
+          </div>
+        </div>
+
+
+            </div>
+ 
+      <!-------------News Detection Code Ends------------------------->
+          
+          
+        
+          
+          
+          
+          
+        </div>
+      </div>
+    </section>
+    <section class="u-clearfix u-grey-80 u-valign-middle-lg u-valign-middle-md u-valign-middle-sm u-valign-middle-xs u-section-3" id="sec-e6db">
+      <div class="u-custom-color-2 u-shape u-shape-rectangle u-shape-1"></div>
+      <h1 class="u-text u-text-1">Motivations</h1>
+      <h4 class="u-text u-text-2" spellcheck="false">We wanted to create something beneficial and a text summarizer would be the perfect option as it would allow people to cut reading time on articles and give them the main points, making it much more efficent and time saving.&nbsp;</h4>
+      <div class="u-custom-color-2 u-shape u-shape-rectangle u-shape-2"></div>
+    </section>
+    <section class="u-align-center u-clearfix u-section-4" id="sec-b081">
+      <div class="u-clearfix u-sheet u-sheet-1"><!--post_details--><!--post_details_options_json--><!--{"source":""}--><!--/post_details_options_json--><!--blog_post-->
+        <div class="u-container-style u-expanded-width u-post-details u-post-details-1">
+          <div class="u-container-layout u-container-layout-1">
+            <h1 class="u-text u-text-default u-text-1">Pre-processing our data<br>
+            </h1>
+            <p class="u-text u-text-2">So using our Amazon product reviews dataset, we cleaned and tokenized our data by getting rid of stopw​ords, punctuation, HTML tags, special characters, short words, etc.<br>
+            </p><!--blog_post_image-->
+            
+
+            
+            
+            <img alt="" class="u-blog-control u-expanded-width u-image u-image-default u-image-1" src="{{ url_for('static', filename='images/pre-proc-data.png')}}" data-image-width="1792" data-image-height="824"><!--/blog_post_image-->
+          </div>
+        </div><!--/blog_post--><!--/post_details-->
+      </div>
+    </section>
+    <section class="u-clearfix u-section-5" id="sec-becd">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <img class="u-image u-image-1" 
+             
+             src="{{ url_for('static', filename='images/his.png')}}"
+             
+             data-image-width="852" data-image-height="566">
+        <p class="u-text u-text-1">This shows the distribution of sentence lengths in the articles and summaries.<br>
+        </p><span class="u-icon u-icon-circle u-text-palette-2-base u-icon-1" data-animation-name="flipIn" data-animation-duration="1000" data-animation-delay="0" data-animation-direction="X"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 447.243 447.243" style=""><use xlink:href="#svg-5548"></use></svg><svg class="u-svg-content" viewBox="0 0 447.243 447.243" x="0px" y="0px" id="svg-5548" style="enable-background:new 0 0 447.243 447.243;"><g><g><path d="M420.361,192.229c-1.83-0.297-3.682-0.434-5.535-0.41H99.305l6.88-3.2c6.725-3.183,12.843-7.515,18.08-12.8l88.48-88.48    c11.653-11.124,13.611-29.019,4.64-42.4c-10.441-14.259-30.464-17.355-44.724-6.914c-1.152,0.844-2.247,1.764-3.276,2.754    l-160,160C-3.119,213.269-3.13,233.53,9.36,246.034c0.008,0.008,0.017,0.017,0.025,0.025l160,160    c12.514,12.479,32.775,12.451,45.255-0.063c0.982-0.985,1.899-2.033,2.745-3.137c8.971-13.381,7.013-31.276-4.64-42.4    l-88.32-88.64c-4.695-4.7-10.093-8.641-16-11.68l-9.6-4.32h314.24c16.347,0.607,30.689-10.812,33.76-26.88    C449.654,211.494,437.806,195.059,420.361,192.229z"></path>
+</g>
+</g></svg></span>
+        <img class="u-image u-image-round u-radius-10 u-image-2" 
+             src="{{ url_for('static', filename='images/summmm.png')}}"
+             
+             
+              alt="" data-image-width="912" data-image-height="330">
+        <p class="u-text u-text-2">This shows 94% of summary lengths fall below the length of 8 words.<br>
+        </p><span class="u-icon u-icon-circle u-text-palette-3-light-1 u-icon-2" data-animation-name="flipIn" data-animation-duration="1000" data-animation-delay="0" data-animation-direction="X"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 492.004 492.004" style=""><use xlink:href="#svg-ad74"></use></svg><svg class="u-svg-content" viewBox="0 0 492.004 492.004" x="0px" y="0px" id="svg-ad74" style="enable-background:new 0 0 492.004 492.004;"><g><g><path d="M484.14,226.886L306.46,49.202c-5.072-5.072-11.832-7.856-19.04-7.856c-7.216,0-13.972,2.788-19.044,7.856l-16.132,16.136    c-5.068,5.064-7.86,11.828-7.86,19.04c0,7.208,2.792,14.2,7.86,19.264L355.9,207.526H26.58C11.732,207.526,0,219.15,0,234.002    v22.812c0,14.852,11.732,27.648,26.58,27.648h330.496L252.248,388.926c-5.068,5.072-7.86,11.652-7.86,18.864    c0,7.204,2.792,13.88,7.86,18.948l16.132,16.084c5.072,5.072,11.828,7.836,19.044,7.836c7.208,0,13.968-2.8,19.04-7.872    l177.68-177.68c5.084-5.088,7.88-11.88,7.86-19.1C492.02,238.762,489.228,231.966,484.14,226.886z"></path>
+</g>
+</g></svg></span>
+        <img class="u-image u-image-round u-radius-10 u-image-3" 
+             src="{{ url_for('static', filename='images/len.png')}}"
+             
+             alt="" data-image-width="650" data-image-height="216"><span class="u-icon u-icon-circle u-text-palette-4-base u-icon-3" data-animation-name="flipIn" data-animation-duration="1000" data-animation-delay="0" data-animation-direction="X"><svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 447.243 447.243" style=""><use xlink:href="#svg-3f8e"></use></svg><svg class="u-svg-content" viewBox="0 0 447.243 447.243" x="0px" y="0px" id="svg-3f8e" style="enable-background:new 0 0 447.243 447.243;"><g><g><path d="M420.361,192.229c-1.83-0.297-3.682-0.434-5.535-0.41H99.305l6.88-3.2c6.725-3.183,12.843-7.515,18.08-12.8l88.48-88.48    c11.653-11.124,13.611-29.019,4.64-42.4c-10.441-14.259-30.464-17.355-44.724-6.914c-1.152,0.844-2.247,1.764-3.276,2.754    l-160,160C-3.119,213.269-3.13,233.53,9.36,246.034c0.008,0.008,0.017,0.017,0.025,0.025l160,160    c12.514,12.479,32.775,12.451,45.255-0.063c0.982-0.985,1.899-2.033,2.745-3.137c8.971-13.381,7.013-31.276-4.64-42.4    l-88.32-88.64c-4.695-4.7-10.093-8.641-16-11.68l-9.6-4.32h314.24c16.347,0.607,30.689-10.812,33.76-26.88    C449.654,211.494,437.806,195.059,420.361,192.229z"></path>
+</g>
+</g></svg></span>
+        <p class="u-text u-text-3">Setting maximum text length to 30 words and maximum summary length to 8 words.<br>
+        </p>
+      </div>
+    </section>
+    <section class="u-clearfix u-gradient u-section-6" id="sec-fdf1">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <h1 class="u-text u-text-default u-text-1">Executing the rest of our code<br>
+        </h1>
+        <p class="u-text u-text-default u-text-2">Then we split our data into training and test data. We import a tokenizer and get rid of words that fall below and threshold frequency and use the LSTM to execute the rest of our project.<br>
+        </p>
+        <h2 class="u-text u-text-default u-text-3">LSTM <br>
+        </h2>
+        <ul class="u-text u-text-default u-text-4">
+          <li>LSTM stands for Long Short Term Memory</li>
+          <li>We used LSTM because RNN, or Recurring Neural Network, has something called the vanishing gradient problem.<br>
+          </li>
+          <li>Essentially, because of the way an RNN system works, it has a very short-term memory, which means it works poorly with long sentences.<br>
+          </li>
+          <li>LSTM, on the other hand, has gates that regulate information, and even chooses to forget things.</li>
+        </ul>
+        <img class="u-image u-image-default u-image-1" 
+             
+             src="{{ url_for('static', filename='images/LSTM.png')}}"
+             
+             
+            alt="" data-image-width="842" data-image-height="588">
+      </div>
+    </section>
+    <section class="u-clearfix u-section-7" id="sec-8cb5">
+      <div class="u-align-left u-clearfix u-sheet u-sheet-1">
+        <h1 class="u-text u-text-default u-text-1">Training and Evaluation<br>
+        </h1>
+        <p class="u-text u-text-default u-text-2">Our algorithm calculates a rouge score<br>
+        </p>
+        <img class="u-image u-image-default u-preserve-proportions u-image-1" 
+             
+             src="{{ url_for('static', filename='images/928500_medium2000.png')}}"
+             
+            alt="">
+      </div>
+    </section>
+    <section class="u-clearfix u-grey-10 u-section-8" id="sec-b8ca">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <h1 class="u-text u-text-default u-text-1">What we learned from this project<br>
+        </h1>
+        <ul class="u-text u-text-default u-text-2">
+          <li>
+            <span style="font-size: 1.25rem;">This project sparked an interest in us to learn more by ourselves after this camp<br>
+            </span>
+          </li>
+          <li>
+            <span style="font-size: 1.25rem;">We were introduced to new knowledge like neural networks and word embedding<br>
+            </span>
+          </li>
+          <li>
+            <span style="font-size: 1.25rem;">Learning to work efficiently in a team online was something we all took away from this.</span>
+            <br>
+          </li>
+        </ul>
+        <img class="u-image u-image-default u-preserve-proportions u-image-1" 
+            
+             
+             src="{{ url_for('static', filename='images/2238824_small500.jpg')}}"
+             
+             
+           alt="">
+      </div>
+    </section>
+    <section class="u-clearfix u-grey-75 u-section-9" id="sec-6e60">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-clearfix u-gutter-0 u-layout-wrap u-layout-wrap-1">
+          <div class="u-layout">
+            <div class="u-layout-row">
+              <div class="u-align-left u-container-style u-layout-cell u-right-cell u-size-60 u-layout-cell-1">
+                <div class="u-container-layout u-container-layout-1">
+                  <h2 class="u-text u-text-1" spellcheck="false">Jeremy Kintana</h2>
+                  <p class="u-text u-text-2" spellcheck="false">Product Manager<br>Goes to Mountain View High School, CA
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="u-clearfix u-gutter-0 u-layout-wrap u-layout-wrap-2">
+          <div class="u-layout">
+            <div class="u-layout-row">
+              <div class="u-align-left u-container-style u-layout-cell u-right-cell u-size-60 u-layout-cell-2">
+                <div class="u-container-layout u-container-layout-2">
+                  <h2 class="u-text u-text-3" spellcheck="false">Tharune Kanagasabai</h2>
+                  <p class="u-text u-text-4" spellcheck="false">Web Designer<br>Goes to Olentangy Berlin High School, OH
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="u-clearfix u-grey-75 u-section-10" id="sec-2b2e">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-clearfix u-gutter-0 u-layout-wrap u-layout-wrap-1">
+          <div class="u-layout">
+            <div class="u-layout-row">
+              <div class="u-align-left u-container-style u-layout-cell u-right-cell u-size-60 u-layout-cell-1">
+                <div class="u-container-layout u-container-layout-1">
+                  <h2 class="u-text u-text-1" spellcheck="false">Aaron Shih</h2>
+                  <p class="u-text u-text-2" spellcheck="false">Mathematician&nbsp;<br>Goes to Leland High School, CA
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="u-clearfix u-gutter-0 u-layout-wrap u-layout-wrap-2">
+          <div class="u-layout">
+            <div class="u-layout-row">
+              <div class="u-align-left u-container-style u-layout-cell u-right-cell u-size-60 u-layout-cell-2">
+                <div class="u-container-layout u-container-layout-2">
+                  <h2 class="u-text u-text-3" spellcheck="false">Pradyoth Kalluri</h2>
+                  <p class="u-text u-text-4" spellcheck="false">ML Engineer<br>Goes to Leland High School in San Jose, CA<br>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="u-clearfix u-grey-75 u-section-11" id="sec-bbe6">
+      <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+        <div class="u-clearfix u-gutter-0 u-layout-wrap u-layout-wrap-1">
+          <div class="u-layout">
+            <div class="u-layout-row">
+              <div class="u-align-left u-container-style u-layout-cell u-right-cell u-size-60 u-layout-cell-1">
+                <div class="u-container-layout u-container-layout-1">
+                  <h2 class="u-text u-text-1" spellcheck="false">James Park</h2>
+                  <p class="u-text u-text-2" spellcheck="false">Data Scientist<br>Goes to Mountain View High School, CA<br>Enjoys Origami, Minecraft, and Guitar
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="u-clearfix u-gutter-0 u-layout-wrap u-layout-wrap-2">
+          <div class="u-layout">
+            <div class="u-layout-row">
+              <div class="u-align-left u-container-style u-layout-cell u-right-cell u-size-60 u-layout-cell-2">
+                <div class="u-container-layout u-container-layout-2">
+                  <h2 class="u-text u-text-3" spellcheck="false">Abhijay Movva</h2>
+                  <h3 class="u-text u-text-4">Vivrd Prasanna</h3>
+                  <p class="u-text u-text-5" spellcheck="false">Web Designer<br>Goes to American High School
+                  </p>
+                  <h4 class="u-text u-text-6">Teaching Assistant</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="u-clearfix u-grey-75 u-section-12" id="sec-e431">
+      <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+        <img class="u-image u-image-default u-image-1" src="{{ url_for('static', filename='images/Screenshot2021-06-30135105.png')}}"
+             
+             alt="" data-image-width="1423" data-image-height="886">
+      </div>
+    </section>
+    
+    
+    <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-0b4c"><div class="u-clearfix u-sheet u-sheet-1">
+        <p class="u-small-text u-text u-text-variant u-text-1">Sample text. Click to select the text box. Click again or double click to start editing the text.</p>
+      </div></footer>
+    <section class="u-backlink u-clearfix u-grey-80">
+      <a class="u-link" href="https://nicepage.com/website-templates" target="_blank">
+        <span>Website Templates</span>
+      </a>
+      <p class="u-text">
+        <span>created with</span>
+      </p>
+      <a class="u-link" href="https://nicepage.com/" target="_blank">
+        <span>Website Builder Software</span>
+      </a>. 
+    </section>
+  </body>
+</html>
