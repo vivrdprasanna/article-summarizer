@@ -69,7 +69,7 @@ def get_summary(url):
 
 
     # Gettings best 5 lines             
-    best_sentences = heapq.nlargest(4, sent2score, key=sent2score.get)
+    best_sentences = heapq.nlargest(3, sent2score, key=sent2score.get)
 
     print('---------------------------------------------------------')
 #     for sentence in best_sentences:

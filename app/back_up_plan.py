@@ -16,10 +16,9 @@ from simple_version import get_summary
 
 
 # setup the webservver
-# port = 2021
-# base_url = get_base_url(port)
-# app = Flask(__name__, static_url_path=base_url+'static')
-app = Flask(__name__)
+port = 2022
+base_url = get_base_url(port)
+app = Flask(__name__, static_url_path=base_url+'static')
 
 
 IMAGE_FOLDER=os.path.join('static','images')
@@ -27,12 +26,12 @@ app.config['UPLOAD_FOLDER']=IMAGE_FOLDER
     
 
 
-# @app.route(base_url)
+@app.route(base_url)
 def home():
     return render_template('home.html')
 
 
-# @app.route(base_url+"/result",methods=["GET","POST"])
+@app.route(base_url+"/result",methods=["GET","POST"])
 @cross_origin()
 def result():
 	if request.method=="POST":
