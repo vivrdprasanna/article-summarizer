@@ -16,9 +16,9 @@ from simple_version import get_summary
 
 
 # setup the webservver
-port = 2022
-base_url = get_base_url(port)
-app = Flask(__name__, static_url_path=base_url+'static')
+# port = 2022
+# base_url = get_base_url(port)
+app = Flask(__name__)
 
 
 IMAGE_FOLDER=os.path.join('static','images')
@@ -26,12 +26,12 @@ app.config['UPLOAD_FOLDER']=IMAGE_FOLDER
     
 
 
-@app.route(base_url)
+@app.route('/')
 def home():
     return render_template('home.html')
 
 
-@app.route(base_url+"/result",methods=["GET","POST"])
+@app.route('/result',methods=["GET","POST"])
 @cross_origin()
 def result():
 	if request.method=="POST":
@@ -46,11 +46,11 @@ def result():
 
 
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
     # change the code.ai-camp.org to the site where you are editing this file.
-    print("Try to open\n\n    https://cocalc3.ai-camp.org" + base_url + '\n\n')
+#    print("Try to open\n\n    https://cocalc3.ai-camp.org" + base_url + '\n\n')
     # remove debug=True when deploying it
-    app.run(host = '0.0.0.0', port=port, debug=True)
-    import sys; sys.exit(0)
+#    app.run(host = '0.0.0.0', port=port, debug=True)
+#    import sys; sys.exit(0)
 
 
