@@ -18,15 +18,12 @@ app = Flask(__name__)
 
 IMAGE_FOLDER=os.path.join('static','images')
 app.config['UPLOAD_FOLDER']=IMAGE_FOLDER
-    
-
 
 # @app.route(base_url)
 def home():
     return render_template('home.html')
 
-
-@app.route(base_url + "#", methods=["GET","POST"])
+@app.route("#", methods=["GET","POST"])
 @cross_origin()
 def result():
     if request.method=="POST":
@@ -42,15 +39,9 @@ def result():
     return render_template('home.html',prediction_text=f' {output}')
     return render_template("home.html")
 
-
-
-
-
 if __name__ == "__main__":
     # change the code.ai-camp.org to the site where you are editing this file.
     print("Try to open\n\n    https://cocalc3.ai-camp.org" + base_url + '\n\n')
     # remove debug=True when deploying it
     app.run(host = '0.0.0.0', port=port, debug=True)
     import sys; sys.exit(0)
-
-
