@@ -19,8 +19,8 @@ from tensorflow.keras.layers import Embedding
 from tensorflow.keras.callbacks import EarlyStopping
 
 
-model = tf.keras.models.load_model("spam_model")
-with open('spam_model/tokenizer.pkl', 'rb') as input:
+model = tf.keras.models.load_model("spam_model.h5")
+with open('tokenizer.pkl', 'rb') as input:
     tokenizer = pickle.load(input)
     
 def get_spam_or_ham(pred):
