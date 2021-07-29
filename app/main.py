@@ -6,7 +6,7 @@ import numpy as np
 import os
 from flask_cors import cross_origin
 from utils import get_base_url, allowed_file, and_syntax
-from spam_or_ham import predict
+from classifier import predict
 
 # setup the webservver
 # port = 1234
@@ -31,11 +31,7 @@ def result():
     if request.method=="POST":
         review = (request.form["Review"])
         prediction = predict(review)
-        output=""
-        if not "not" in prediction:
-            output="spam!" 
-        else:
-            output="not spam!"
+        output= prediction
     return render_template('home.html',prediction_text=f' {output}')
     return render_template("home.html")
 
