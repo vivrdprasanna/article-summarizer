@@ -1,165 +1,103 @@
-from nltk.tokenize import word_tokenize
+import re, json, nltk
 from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
 from nltk.stem import PorterStemmer
-from math import log, sqrt
+from nltk.tokenize import sent_tokenize, word_tokenize
+nltk.download('stopwords')
+nltk.download('punkt')
+
+ps = PorterStemmer()
+file = r'train.json'
+with open(file) as train_file:
+    dict_train = json.load(train_file)
+
+# DATA CLEANING
+    
+id_ = []
+cuisine = []
+ingredients = []
+for i in range(len(dict_train)):
+    id_.append(dict_train[i]['id'])
+    cuisine.append(dict_train[i]['cuisine'])
+    ingredients.append(dict_train[i]['ingredients'])
+    
 import pandas as pd
-import numpy as np
-import re
+df = pd.DataFrame({'id':id_, 
+                   'cuisine':cuisine, 
+                   'ingredients':ingredients})
 
-mails = pd.read_csv('spam.csv', encoding = 'latin-1')
-mails.drop(['Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4'], axis = 1, inplace = True)
-mails.rename(columns = {'v1': 'labels', 'v2': 'message'}, inplace = True)
-mails['label'] = mails['labels'].map({'ham': 0, 'spam': 1})
-mails.drop(['labels'], axis = 1, inplace = True)
+new = []
+for s in df['ingredients']:
+    s = ' '.join(s)
+    new.append(s)    
+    
+df['ing'] = new
 
-totalMails = 4825 + 747
-trainIndex, testIndex = list(), list()
-for i in range(mails.shape[0]):
-    if np.random.uniform(0, 1) < 0.75:
-        trainIndex += [i]
-    else:
-        testIndex += [i]
-trainData = mails.loc[trainIndex]
-testData = mails.loc[testIndex]
+def list_ingredients_to_string(lst):
+    string = ''
+    for element in lst:
+        string += element + ' '
+    return string
 
-trainData.reset_index(inplace = True)
-trainData.drop(['index'], axis = 1, inplace = True)
-
-testData.reset_index(inplace = True)
-testData.drop(['index'], axis = 1, inplace = True)
-
-def process_message(message, lower_case = True, stem = True, stop_words = True, gram = 2):
-    if lower_case:
-        message = message.lower()
-    words = word_tokenize(message)
-    words = [w for w in words if len(w) > 2]
-    if gram > 1:
-        w = []
-        for i in range(len(words) - gram + 1):
-            w += [' '.join(words[i:i + gram])]
-        return w
-    if stop_words:
-        sw = stopwords.words('english')
-        words = [word for word in words if word not in sw]
-    if stem:
-        stemmer = PorterStemmer()
-        words = [stemmer.stem(word) for word in words]   
-    return words
-
-class SpamClassifier(object):
-    def __init__(self, trainData, method = 'tf-idf'):
-        self.mails, self.labels = trainData['message'], trainData['label']
-        self.method = method
-
-    def train(self):
-        self.calc_TF_and_IDF()
-        if self.method == 'tf-idf':
-            self.calc_TF_IDF()
-        else:
-            self.calc_prob()
-
-    def calc_prob(self):
-        self.prob_spam = dict()
-        self.prob_ham = dict()
-        for word in self.tf_spam:
-            self.prob_spam[word] = (self.tf_spam[word] + 1) / (self.spam_words + \
-                                                                len(list(self.tf_spam.keys())))
-        for word in self.tf_ham:
-            self.prob_ham[word] = (self.tf_ham[word] + 1) / (self.ham_words + \
-                                                                len(list(self.tf_ham.keys())))
-        self.prob_spam_mail, self.prob_ham_mail = self.spam_mails / self.total_mails, self.ham_mails / self.total_mails 
+def clean_ingredients_string(s, debug = False):
+    s = re.sub(r'[^\w\s]', '' ,s) # Remove punctuations
+    s = re.sub(r"(\d)",  "", s)  # Remove digits
+    s = re.sub(r'\([^)]*\)', '', s) # Remove content inside paranthesis
+    s = re.sub(u'\w*\u2122', '', s) # Remove Brand Name   
+    s = s.lower()  #Convert to lowercase
+    # Stemming
+    words = word_tokenize(s)
+    word_ps = []
+    for w in words:
+        word_ps.append(ps.stem(w))
+    s=' '.join(word_ps)
+    return s
 
 
-    def calc_TF_and_IDF(self):
-        noOfMessages = self.mails.shape[0]
-        self.spam_mails, self.ham_mails = self.labels.value_counts()[1], self.labels.value_counts()[0]
-        self.total_mails = self.spam_mails + self.ham_mails
-        self.spam_words = 0
-        self.ham_words = 0
-        self.tf_spam = dict()
-        self.tf_ham = dict()
-        self.idf_spam = dict()
-        self.idf_ham = dict()
-        for i in range(noOfMessages):
-            message_processed = process_message(self.mails[i])
-            count = list() #To keep track of whether the word has ocured in the message or not.
-                           #For IDF
-            for word in message_processed:
-                if self.labels[i]:
-                    self.tf_spam[word] = self.tf_spam.get(word, 0) + 1
-                    self.spam_words += 1
-                else:
-                    self.tf_ham[word] = self.tf_ham.get(word, 0) + 1
-                    self.ham_words += 1
-                if word not in count:
-                    count += [word]
-            for word in count:
-                if self.labels[i]:
-                    self.idf_spam[word] = self.idf_spam.get(word, 0) + 1
-                else:
-                    self.idf_ham[word] = self.idf_ham.get(word, 0) + 1
+ingredients_cleaned = []
+counter = 1
+for s in df['ing']:
+    cleaned_string = clean_ingredients_string(s)
+    ingredients_cleaned.append(cleaned_string)
+    if counter % (39000/6) == 0:
+        print(counter, sep = ' ')
+    counter += 1
+df['ingredients_cleaned'] = ingredients_cleaned
 
-    def calc_TF_IDF(self):
-        self.prob_spam = dict()
-        self.prob_ham = dict()
-        self.sum_tf_idf_spam = 0
-        self.sum_tf_idf_ham = 0
-        for word in self.tf_spam:
-            self.prob_spam[word] = (self.tf_spam[word]) * log((self.spam_mails + self.ham_mails) \
-                                                          / (self.idf_spam[word] + self.idf_ham.get(word, 0)))
-            self.sum_tf_idf_spam += self.prob_spam[word]
-        for word in self.tf_spam:
-            self.prob_spam[word] = (self.prob_spam[word] + 1) / (self.sum_tf_idf_spam + len(list(self.prob_spam.keys())))
+df = df[['cuisine', 'ingredients_cleaned']]
+print(df.head(5))
+print("CLEANING DONE")
 
-        for word in self.tf_ham:
-            self.prob_ham[word] = (self.tf_ham[word]) * log((self.spam_mails + self.ham_mails) \
-                                                          / (self.idf_spam.get(word, 0) + self.idf_ham[word]))
-            self.sum_tf_idf_ham += self.prob_ham[word]
-        for word in self.tf_ham:
-            self.prob_ham[word] = (self.prob_ham[word] + 1) / (self.sum_tf_idf_ham + len(list(self.prob_ham.keys())))
+# VECTORIZING
 
+from sklearn.feature_extraction.text import TfidfVectorizer
+vectorizer = TfidfVectorizer()
+X = vectorizer.fit_transform(df['ingredients_cleaned'])
 
-        self.prob_spam_mail, self.prob_ham_mail = self.spam_mails / self.total_mails, self.ham_mails / self.total_mails 
+from sklearn import preprocessing
+label_encoder = preprocessing.LabelEncoder()
+label_encoder.fit(df['cuisine'])
+Y = label_encoder.transform(df['cuisine']) 
 
-    def classify(self, processed_message):
-        pSpam, pHam = 0, 0
-        for word in processed_message:                
-            if word in self.prob_spam:
-                pSpam += log(self.prob_spam[word])
-            else:
-                if self.method == 'tf-idf':
-                    pSpam -= log(self.sum_tf_idf_spam + len(list(self.prob_spam.keys())))
-                else:
-                    pSpam -= log(self.spam_words + len(list(self.prob_spam.keys())))
-            if word in self.prob_ham:
-                pHam += log(self.prob_ham[word])
-            else:
-                if self.method == 'tf-idf':
-                    pHam -= log(self.sum_tf_idf_ham + len(list(self.prob_ham.keys()))) 
-                else:
-                    pHam -= log(self.ham_words + len(list(self.prob_ham.keys())))
-            pSpam += log(self.prob_spam_mail)
-            pHam += log(self.prob_ham_mail)
-        return pSpam >= pHam
+cuisine_map = {'0':'brazilian', '1':'british', '2':'cajun_creole', '3':'chinese', '4':'filipino', '5':'french', '6':'greek', '7':'indian', '8':'irish', '9':'italian', '10':'jamaican', '11':'japanese', '12':'korean', '13':'mexican', '14':'moroccan', '15':'russian', '16':'southern_us', '17':'spanish', '18':'thai', '19':'vietnamese'}
 
-    def predict(self, testData):
-        result = dict()
-        for (i, message) in enumerate(testData):
-            processed_message = process_message(message)
-            result[i] = int(self.classify(processed_message))
-        return result
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
 
-sc_tf_idf = SpamClassifier(trainData, 'tf-idf')
-sc_tf_idf.train()
-preds_tf_idf = sc_tf_idf.predict(testData['message'])
+X_train, X_test, y_train, y_test = train_test_split(X, Y, test_size = 0.2, random_state = 100)
 
-sc_bow = SpamClassifier(trainData, 'bow')
-sc_bow.train()
-preds_bow = sc_bow.predict(testData['message'])
+# DEFINE/TRAIN THE MODEL
+from sklearn.svm import SVC
+from sklearn import svm
 
-def predict(msg):
-    pm = process_message(msg)
-    prediction = sc_tf_idf.classify(pm)
-    if (prediction):
-        return "Spam!"
-    return "Not Spam!"
+lin_clf = svm.LinearSVC(C=1, verbose = 1)
+print("FITTING MODEL")
+lin_clf.fit(X_train, y_train)
+y_pred = lin_clf.predict(X_test)
+print("Accuracy:", round(accuracy_score(y_test,y_pred)*100, 4))
+result = pd.DataFrame({'Actual Cuisine':y_test, 'Predicted Cuisine':y_pred})
+
+def predict(single_input):
+    single_input_cleaned = clean_ingredients_string(single_input, True)
+    vectorized_string = vectorizer.transform([single_input_cleaned])
+    return "prediction: " + cuisine_map[str(lin_clf.predict(vectorized_string[0])[0])]
